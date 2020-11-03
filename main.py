@@ -20,8 +20,12 @@ if __name__ == '__main__':
     parser = create_parser()
     my = parser.parse_args(sys.argv[1:])
 
+    # Set counters back to zero
+    cfg.basic_counter = 0
+    cfg.message = False
+
     # print(namespace.user_id)
-    query = q(my.mode, my.count, my.user_id, my.country, cfg.basic_offset)
+    query = q(my.mode, my.count, my.user_id, my.country, cfg.basic_offset, cfg.basic_counter)
 
     if my.user_id is not None:
         q.parse(query, cfg.url_user_id + query.user_id)
@@ -31,14 +35,3 @@ if __name__ == '__main__':
         q.parse(query, cfg.url_leaderboard + str(query.offset))
     else:
         print(cfg.err_no_attr)
-
-    """for param in sys.argv:
-        print(param)
-"""
-    """user_query = input('>> ')
-
-    temp = f.Query('leaderboard', 10, 'Jamaco225', 'USA')
-
-    temp.parse(cfg.url_leaderboard + user_query)"""
-
-

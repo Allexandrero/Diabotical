@@ -1,6 +1,4 @@
 import time
-import urllib.request
-import urllib.error
 
 
 def sleep(timeout, retry=3):

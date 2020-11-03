@@ -9,3 +9,7 @@ err_no_attr = '[ERROR] Not enough components to create a query. Perhaps, you hav
 basic_offset = 0
 
 basic_count = 20
+
+basic_counter = 0
+
+message = False
