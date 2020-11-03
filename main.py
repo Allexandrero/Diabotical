@@ -21,12 +21,12 @@ if __name__ == '__main__':
     my = parser.parse_args(sys.argv[1:])
 
     # print(namespace.user_id)
-    query = q(my.mode, my.count, my.user_id, my.country, 0)
+    query = q(my.mode, my.count, my.user_id, my.country, cfg.basic_offset)
 
     if my.user_id is not None:
-        pass
+        q.parse(query, cfg.url_user_id + query.user_id)
     elif my.country is not None:
-        pass
+        q.parse(query, cfg.url_country + str(query.offset))
     elif my.mode is not None:
         q.parse(query, cfg.url_leaderboard + str(query.offset))
     else:
