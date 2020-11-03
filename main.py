@@ -1,17 +1,44 @@
 import sys
+import argparse
 
-import functions as f
+from functions import Query as q
 import lib.config as cfg
 
 
-if __name__ == '__main__':
-    for param in sys.argv:
-        print(param)
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m', '--mode', nargs='?', type=str)
+    parser.add_argument('-c', '--count', nargs='?', type=int)
+    parser.add_argument('-u', '--user_id', nargs='?', type=str)
+    parser.add_argument('-y', '--country', nargs='?', type=str)
 
-    user_query = input('>> ')
+    return parser
+
+
+if __name__ == '__main__':
+
+    parser = create_parser()
+    my = parser.parse_args(sys.argv[1:])
+
+    # print(namespace.user_id)
+    query = q(my.mode, my.count, my.user_id, my.country, 0)
+
+    if my.user_id is not None:
+        pass
+    elif my.country is not None:
+        pass
+    elif my.mode is not None:
+        q.parse(query, cfg.url_leaderboard + str(query.offset))
+    else:
+        print(cfg.err_no_attr)
+
+    """for param in sys.argv:
+        print(param)
+"""
+    """user_query = input('>> ')
 
     temp = f.Query('leaderboard', 10, 'Jamaco225', 'USA')
 
-    temp.parse(cfg.url_leaderboard + user_query)
+    temp.parse(cfg.url_leaderboard + user_query)"""
 
 
