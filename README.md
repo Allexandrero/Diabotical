@@ -1,9 +1,9 @@
-## Diabotical Parser
+# Diabotical Parser
 
 This console application was created as a simple interest in parsing web data from "Diabotical" game.
 
 
-###### Quick start
+## Quick start
 
 This app achieves in three tasks:
 
@@ -23,7 +23,7 @@ python main.py --mode ffa --user_id 9a1c62de13ef40d69442a891b55a21fb
 python main.py --mode rocket_arena --country ru
 ```
 
-###### Usage
+## Usage
 
 1. Download the project
 2. Extract the project into preferred directory
@@ -51,7 +51,7 @@ python main.py --mode <mode> --count N --user_id <user_id>
 python main.py --mode <mode> --count N --country ru
 ```
 
-######Attention! 
+## Attention! 
 
 Parser might  work slowly, because the website, which it takes data from, is limited to the amount of requests!
 
