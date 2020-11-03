@@ -5,6 +5,29 @@ import lib.config as cfg
 import decorators as now
 
 
+def define_gamemode(mode):
+    if mode == 'macguffin':
+        return 'r_macguffin'
+
+    elif mode == 'ffa':
+        return 'r_ca_1'
+
+    elif mode == 'ca':
+        return 'r_ca_2'
+
+    elif mode == 'rocket_arena':
+        return 'r_rocket_arena_2'
+
+    elif mode == 'shaft_arena':
+        return 'r_shaft_arena_1'
+
+    elif mode == 'wipeout':
+        return 'r_wo'
+
+    else:
+        return '[ERROR] Incorrect game mode'
+
+
 class Query:
 
     def __init__(self, mode, count, user_id, country, offset, counter):
@@ -78,6 +101,7 @@ class Query:
             if str(data['leaderboard']) == '[]':
                 print('Finished. The amount of ' + str(self.country) + ' users is ' + str(counter))
                 return
+
             else:
                 if not cfg.message:  # Just annotation that module has started his job
                     cfg.message = True
@@ -92,26 +116,9 @@ class Query:
                 # Keeps parsing until there is no more data
                 self.offset += 20
                 cfg.basic_counter = counter
-                self.parse(cfg.url_country + str(self.offset))
-
-    def define_gamemode(self, mode):
-        if mode == 'mcguffin':
-            return
-        elif mode == 'ffa':
-            return
-        elif mode == 'ca':
-            return
-        elif mode == 'rocket_arena':
-            return
-        elif mode == 'shaft_arena':
-            return
-        elif mode == 'wipeout':
-            return
-        else:
-            print('ERROR. Game mode incorrect')
+                self.parse(cfg.temp_url + str(self.offset))
 
     def parse(self, url):
-
         info = urlopen(url)
         result = json.loads(info.read())
 
@@ -125,9 +132,9 @@ class Query:
         # print edited data
         if self.user_id is not None:
             self.get_json_by_user_id()
+
         elif self.country is not None:
             self.get_json_by_country(cfg.basic_counter)
-        elif self.mode == 'macguffin' or 'ffa' or 'ca' or 'rocket_arena' or 'shaft_arena' or 'wipeout':
-            self.get_json()
+
         else:
-            print('[ERROR] Game mode incorrect')
+            self.get_json()

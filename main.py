@@ -1,6 +1,7 @@
 import sys
 import argparse
 
+import functions
 from functions import Query as q
 import lib.config as cfg
 
@@ -23,15 +24,26 @@ if __name__ == '__main__':
     # Set counters back to zero
     cfg.basic_counter = 0
     cfg.message = False
+    cfg.temp_url = ''
 
-    # print(namespace.user_id)
+    # Creating request
     query = q(my.mode, my.count, my.user_id, my.country, cfg.basic_offset, cfg.basic_counter)
 
+    # Creating URL. Depends on input arguments
     if my.user_id is not None:
-        q.parse(query, cfg.url_user_id + query.user_id)
+        cfg.temp_url = cfg.url_user_id + query.user_id
+        q.parse(query, cfg.temp_url)
+
     elif my.country is not None:
-        q.parse(query, cfg.url_country + str(query.offset))
+        cfg.temp_url = cfg.url_country + 'mode=' + str(functions.define_gamemode(query.mode)) + '&offset='
+        q.parse(query, cfg.temp_url + str(query.offset))
+
     elif my.mode is not None:
-        q.parse(query, cfg.url_leaderboard + str(query.offset))
+        cfg.temp_url = cfg.url_leaderboard + 'mode=' + str(functions.define_gamemode(query.mode)) + '&offset='
+        q.parse(query, cfg.temp_url + str(query.offset))
     else:
         print(cfg.err_no_attr)
+
+
+
+
