@@ -1,8 +1,8 @@
 import sys
 import argparse
 
-from app import functions
-from app.functions import Query as q
+import functions
+from functions import Query as q
 import lib.config as cfg
 
 
