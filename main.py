@@ -1,8 +1,8 @@
 import sys
 import argparse
 
-import functions
-from functions import Query as q
+from app import functions
+from app.functions import Query as q
 import lib.config as cfg
 
 
@@ -12,11 +12,12 @@ def create_parser():
     parser.add_argument('-c', '--count', nargs='?', type=int)
     parser.add_argument('-u', '--user_id', nargs='?', type=str)
     parser.add_argument('-y', '--country', nargs='?', type=str)
-
     return parser
 
 
 if __name__ == '__main__':
+
+    print(str(create_parser()) + 'OLOLOLOLOLOLOLOLOLOLO')
 
     parser = create_parser()
     my = parser.parse_args(sys.argv[1:])
